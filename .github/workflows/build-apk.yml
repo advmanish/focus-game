@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -21,15 +21,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y python3-pip git openjdk-17-jdk unzip
+        sudo apt install -y python3-pip git openjdk-17-jdk unzip build-essential
         pip install --upgrade pip
         pip install buildozer
 
-    - name: Build APK
+    - name: Build APK with Buildozer
       run: |
         buildozer android debug
 
-    - name: Upload APK
+    - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
         name: focus-apk
